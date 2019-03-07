@@ -1,0 +1,65 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: {{ template "collector.name" . }}
+  namespace: kube-system
+  labels:
+    app: {{ template "collector.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ template "collector.name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "collector.name" . }}
+        release: {{ .Release.Name }}
+{{- with .Values.podAnnotations }}
+      annotations:
+{{ toYaml . | indent 8 }}
+{{- end }}
+    spec:
+      securityContext:
+        runAsUser: 0
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          volumeMounts:
+            - name: config
+              mountPath: /opt/logrange/collector/config.json
+              subPath: config.json
+            - name: config
+              mountPath: /opt/logrange/collector/log4g.properties
+              subPath: log4g.properties
+{{- range $key, $val := .Values.volumes }}
+            - name: {{ $key }}
+              mountPath: {{ $val }}
+{{- end}}
+      volumes:
+        - name: config
+          configMap:
+            name: {{ template "collector.name" . }}
+{{- range $key, $val := .Values.volumes }}
+        - name: {{ $key }}
+          hostPath:
+            path: {{ $val }}
+{{- end}}
+      resources:
+{{ toYaml .Values.resources | indent 8 }}
+{{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+{{- end }}
+{{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+{{- end }}
+{{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+{{- end }}

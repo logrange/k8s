@@ -1,0 +1,4 @@
+Try Logrange cli tool:
+
+//TODO:
+https://logrange.io/binaries

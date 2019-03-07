@@ -1,0 +1,15 @@
+apiVersion: v1
+appVersion: "1.0"
+name: collector
+description: Log collector agent
+version: 0.1.0
+keywords:
+  - logging
+  - logs
+  - analytics
+  - agent
+  - collector
+home: https://github.com/logrange
+maintainers:
+  - name: The logrange authors
+    email: mail@logrange.io

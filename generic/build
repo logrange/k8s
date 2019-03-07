@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+
+function cleanup {
+    echo "Cleaning up..."
+    rm -rf ${TMP_PATH}
+}
+
+function check {
+    code=$1;
+    if [[ ${code} -ne 0 ]]; then
+        echo "ERROR!"
+        exit ${code}
+    fi
+}
+
+################# Main #################
+
+TMP_PATH=$(mktemp -d)
+trap cleanup EXIT
+
+CUR_PATH=$(pwd)
+BRANCH=$1
+if [[ -z ${BRANCH} ]]; then
+    BRANCH="master"
+fi
+
+BLD_SCPT="https://raw.githubusercontent.com/logrange/logrange/${BRANCH}/build/build"
+cd ${TMP_PATH}
+
+echo "Downloading build script '${BLD_SCPT}'..."
+curl -sOfL ${BLD_SCPT}
+check $?
+
+echo "Building binaries..."
+chmod +x build && ./build ${BRANCH}
+check $?
+
+VERSION=${BRANCH}
+if [[ ${VERSION} == "master" ]]; then
+    VERSION="latest"
+fi
+
+echo "Building docker images..."
+for name in "collector" "logrange"
+do
+    cp ${TMP_PATH}/binaries/linux/x86_64/${name} ${CUR_PATH}/images/${name}
+    check $?
+
+    cd ${CUR_PATH}/images/${name}
+    check $?
+
+    image=logrange/${name}:${VERSION}
+    echo "Building and pushing docker image '${image}'..."
+
+    docker build -t ${image} . >> /dev/null 2>&1 && docker push ${image} >> /dev/null 2>&1
+    check $?
+
+    rm -f ${CUR_PATH}/images/${name}/${name}
+    check $?
+done
+
+echo "Updating helm repository..."
+cd ${CUR_PATH}/charts/_repo/
+
+helm package ../collector --save=false
+check $?
+
+helm package ../logrange --save=false
+check $?
+
+helm repo index .
+check $?
