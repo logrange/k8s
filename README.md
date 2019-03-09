@@ -12,5 +12,8 @@
 4. install Logrange cli command:<br/>
 `curl https://raw.githubusercontent.com/logrange/logrange/master/build/install | bash`
 
+5. run Logrange cli command:<br/>
+`./lr shell --server-addr=logrange.kube-system.svc.cluster.local:9966`
+
 Done...
 
