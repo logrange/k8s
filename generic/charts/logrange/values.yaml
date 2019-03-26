@@ -14,7 +14,9 @@ service:
   port: 9966
 
 volumes:
-  var: /var
+  varlib: /var/lib
+  varlog: /var/log
+  extdockercontainers: /ext/docker/containers
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
@@ -37,9 +39,8 @@ tolerations: []
 
 affinity:
   nodeAffinity:
-    preferredDuringSchedulingIgnoredDuringExecution:
-      - weight: 100
-        preference:
-          matchExpressions:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
             - key: logrange.io/node
               operator: Exists

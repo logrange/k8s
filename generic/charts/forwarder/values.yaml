@@ -9,7 +9,8 @@ image:
   pullPolicy: Always
 
 volumes:
-  var: /var
+  varlib: /var/lib
+  varlog: /var/log
   extdockercontainers: /ext/docker/containers
 
 resources: {}
@@ -27,16 +28,14 @@ resources: {}
 podAnnotations:
   seccomp.security.alpha.kubernetes.io/pod: docker/default
 
-nodeSelector:
-  logrange.io/node: true
+nodeSelector: {}
 
 tolerations: []
 
 affinity:
-  nodeAffinity:
-    preferredDuringSchedulingIgnoredDuringExecution:
-      - weight: 100
-        preference:
-          matchExpressions:
-            - key: logrange.io/node
-              operator: Exists
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: logrange.io/node
+                operator: Exists

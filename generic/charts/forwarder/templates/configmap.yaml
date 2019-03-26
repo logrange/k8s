@@ -28,7 +28,7 @@ data:
 
       "Storage": {
         "Type": "file",
-        "Location": "/var/logrange/lr/storage/"
+        "Location": "/var/lib/logrange/lr/storage/"
       }
     }
 

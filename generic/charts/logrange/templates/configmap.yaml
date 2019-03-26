@@ -23,7 +23,7 @@ data:
         "TlsCAFile": "/opt/logrange/tls/ca.pem"
       },
       "JrnlCtrlConfig": {
-        "JournalsDir": "/var/logrange/db/",
+        "JournalsDir": "/var/lib/logrange/db/",
         "MaxOpenFileDescs": 5000,
         "CheckFullScan": false,
         "RecoverDisabled": false,
