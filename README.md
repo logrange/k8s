@@ -15,5 +15,9 @@
 5. run Logrange cli command:<br/>
 `./lr shell --server-addr=logrange.kube-system.svc.cluster.local:9966`
 
-Done...
+## Log forwarding to 3rd party system
 
+1. install Logrange forwarding agent:<br/>
+`helm install logrange/forwarder`
+
+2. configure your forwarding worker: TBD...

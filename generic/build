@@ -41,21 +41,25 @@ if [[ ${VERSION} == "master" ]]; then
 fi
 
 echo "Building docker images..."
-for name in "collector" "logrange"
+for name_binary in "collector/lr" "forwarder/lr" "logrange/logrange"
 do
-    cp ${TMP_PATH}/binaries/linux/x86_64/${name} ${CUR_PATH}/images/${name}
+    a=(${name_binary//\// })
+    n=${a[0]}
+    b=${a[1]}
+
+    cp ${TMP_PATH}/binaries/linux/x86_64/${b} ${CUR_PATH}/images/${n}
     check $?
 
-    cd ${CUR_PATH}/images/${name}
+    cd ${CUR_PATH}/images/${n}
     check $?
 
-    image=logrange/${name}:${VERSION}
+    image=logrange/${n}:${VERSION}
     echo "Building and pushing docker image '${image}'..."
 
     docker build -t ${image} . >> /dev/null 2>&1 && docker push ${image} >> /dev/null 2>&1
     check $?
 
-    rm -f ${CUR_PATH}/images/${name}/${name}
+    rm -f ${CUR_PATH}/images/${n}/${b}
     check $?
 done
 
@@ -63,6 +67,9 @@ echo "Updating helm repository..."
 cd ${CUR_PATH}/charts/_repo/
 
 helm package ../collector --save=false
+check $?
+
+helm package ../forwarder --save=false
 check $?
 
 helm package ../logrange --save=false

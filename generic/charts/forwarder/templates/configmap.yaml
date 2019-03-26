@@ -1,39 +1,37 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ template "logrange.name" . }}
+  name: {{ template "forwarder.name" . }}
   namespace: kube-system
   labels:
     heritage: {{ .Release.Service }}
     release: {{ .Release.Name }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version }}
-    app: {{ template "logrange.name" . }}
+    app: {{ template "forwarder.name" . }}
 data:
-  logrange.json: |
+  forward.json: |
     {
-      "HostHostId": 0,
-      "HostLeaseTTLSec": 5,
-      "HostRegisterTimeoutSec": 0,
-      "PublicApiRpc": {
-        "ListenAddr": "0.0.0.0:9966",
+      "Forwarder": {
+        "Workers": [],
+        "StateStoreIntervalSec": 10,
+        "ConfigReloadIntervalSec": 20
+      },
+
+      "Transport": {
+        "ListenAddr": "logrange.kube-system.svc.cluster.local:9966",
         "TlsEnabled": false,
         "Tls2Way": false,
-        "TlsCertFile": "/opt/logrange/tls/server.crt",
-        "TlsKeyFile": "/opt/logrange/tls/server.key",
-        "TlsCAFile": "/opt/logrange/tls/ca.pem"
+        "TlsCertFile": "/opt/logrange/lr/tls/client.crt",
+        "TlsKeyFile": "/opt/logrange/lr/tls/client.key",
+        "TlsCAFile": "/opt/logrange/lr/tls/ca.pem"
       },
-      "JrnlCtrlConfig": {
-        "JournalsDir": "/var/logrange/db/",
-        "MaxOpenFileDescs": 5000,
-        "CheckFullScan": false,
-        "RecoverDisabled": false,
-        "RecoverLostDataOk": false,
-        "WriteIdleSec": 120,
-        "WriteFlushMs": 500,
-        "MaxChunkSize": 104857600,
-        "MaxRecordSize": 1048576
+
+      "Storage": {
+        "Type": "file",
+        "Location": "/var/logrange/lr/storage/"
       }
     }
+
 
   log4g.properties: |
     # Console appender

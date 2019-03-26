@@ -13,6 +13,6 @@ RUN mkdir -p /opt/logrange/lr
 
 COPY ["lr", "/opt/logrange/lr/"]
 
-ENTRYPOINT ["/opt/logrange/lr/lr", "collect", \
-"--config-file", "/opt/logrange/lr/collect.json", \
+ENTRYPOINT ["/opt/logrange/lr/lr", "forward", \
+"--config-file", "/opt/logrange/lr/forward.json", \
 "--log-config-file", "/opt/logrange/lr/log4g.properties"]

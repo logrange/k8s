@@ -1,4 +1,4 @@
-Try Logrange cli tool:
+For more details go to:
 
-//TODO:
-https://logrange.io/binaries
+https://github.com/logrange/k8s/
+https://github.com/logrange/logrange/

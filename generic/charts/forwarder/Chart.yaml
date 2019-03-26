@@ -1,14 +1,14 @@
 apiVersion: v1
 appVersion: "1.0"
-name: logrange
-description: Log aggregation storage
+name: forwarder
+description: Log forwarding agent
 version: 0.1.0
 keywords:
   - logging
   - logs
   - analytics
-  - aggregator
-  - storage
+  - agent
+  - forwarder
 home: https://github.com/logrange
 maintainers:
   - name: The logrange authors

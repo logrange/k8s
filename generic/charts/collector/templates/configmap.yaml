@@ -9,21 +9,9 @@ metadata:
     chart: {{ .Chart.Name }}-{{ .Chart.Version }}
     app: {{ template "collector.name" . }}
 data:
-  config.json: |
+  collect.json: |
     {
-      "Remote": {
-        "Transport": {
-          "ListenAddr": "logrange.kube-system.svc.cluster.local:9966",
-          "TlsEnabled": false,
-          "Tls2Way": false,
-          "TlsCertFile": "/opt/logrange/collector/ssl/client.crt",
-          "TlsKeyFile": "/opt/logrange/collector/ssl/client.key",
-          "TlsCAFile": "/opt/logrange/collector/ssl/ca.pem"
-        },
-        "ConnectMaxRetry": 3,
-        "ConnectRetryIntervalSec": 5
-      },
-      "Scanner": {
+      "Collector": {
         "IncludePaths": [
           "/var/log/containers/*.log",
           "/var/log/containers/*/*.log"
@@ -48,9 +36,17 @@ data:
           }
         ]
       },
+      "Transport": {
+        "ListenAddr": "logrange.kube-system.svc.cluster.local:9966",
+        "TlsEnabled": false,
+        "Tls2Way": false,
+        "TlsCertFile": "/opt/logrange/lr/tls/client.crt",
+        "TlsKeyFile": "/opt/logrange/lr/tls/client.key",
+        "TlsCAFile": "/opt/logrange/lr/tls/ca.pem"
+      },
       "Storage": {
         "Type": "file",
-        "Location": "/opt/logrange/collector/storage/"
+        "Location": "/var/logrange/lr/storage/"
       }
     }
 

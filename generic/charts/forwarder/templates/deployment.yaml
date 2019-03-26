@@ -1,22 +1,23 @@
 apiVersion: extensions/v1beta1
-kind: DaemonSet
+kind: Deployment
 metadata:
-  name: {{ template "collector.name" . }}
+  name: {{ template "forwarder.name" . }}
   namespace: kube-system
   labels:
-    app: {{ template "collector.name" . }}
+    app: {{ template "forwarder.name" . }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ template "collector.name" . }}
+      app: {{ template "forwarder.name" . }}
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: {{ template "collector.name" . }}
+        app: {{ template "forwarder.name" . }}
         release: {{ .Release.Name }}
 {{- with .Values.podAnnotations }}
       annotations:
@@ -31,8 +32,8 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           volumeMounts:
             - name: config
-              mountPath: /opt/logrange/lr/collect.json
-              subPath: collect.json
+              mountPath: /opt/logrange/lr/forward.json
+              subPath: forward.json
             - name: config
               mountPath: /opt/logrange/lr/log4g.properties
               subPath: log4g.properties
@@ -43,7 +44,7 @@ spec:
       volumes:
         - name: config
           configMap:
-            name: {{ template "collector.name" . }}
+            name: {{ template "forwarder.name" . }}
 {{- range $key, $val := .Values.volumes }}
         - name: {{ $key }}
           hostPath:
