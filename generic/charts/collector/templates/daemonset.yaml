@@ -31,11 +31,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           volumeMounts:
             - name: config
-              mountPath: /opt/logrange/lr/collect.json
-              subPath: collect.json
-            - name: config
-              mountPath: /opt/logrange/lr/log4g.properties
-              subPath: log4g.properties
+              mountPath: /opt/logrange/lr/config
 {{- range $key, $val := .Values.volumes }}
             - name: {{ $key }}
               mountPath: {{ $val }}
