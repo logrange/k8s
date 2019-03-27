@@ -3,9 +3,9 @@ entries:
   collector:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-03-26T17:26:45.123923-07:00
+    created: 2019-03-26T18:44:06.141855-07:00
     description: Log collector agent
-    digest: d0e91f92e044d0465afc88bbbffc54800b34aa2e26abe862cdcdffd3577cae53
+    digest: ca54138d4aab0820cf7b3d13845ae4f2ab6f4409f0974ac935d2530ca69be481
     home: https://github.com/logrange
     keywords:
     - logging
@@ -23,9 +23,9 @@ entries:
   forwarder:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-03-26T17:26:45.12456-07:00
+    created: 2019-03-26T18:44:06.14216-07:00
     description: Log forwarding agent
-    digest: 48c63dcb632009d5db2b5ad29c3ecf7ce7cdcb40589288c954938f42dc4601f1
+    digest: 9080c41f295db3247db116ce4731f76e7e48ea3b3ca794f30afe8a5305fb3255
     home: https://github.com/logrange
     keywords:
     - logging
@@ -43,9 +43,9 @@ entries:
   logrange:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-03-26T17:26:45.125033-07:00
+    created: 2019-03-26T18:44:06.143201-07:00
     description: Log aggregation storage
-    digest: f91e0d180345f45f17e410a975a3bcc6a5650a73bb4a127a88d3478dcc7247a0
+    digest: 2a3892884bb0e04afacf48ddd3a0fee68ddfd45747dc0c1786d172d6873a010c
     home: https://github.com/logrange
     keywords:
     - logging
@@ -60,4 +60,4 @@ entries:
     urls:
     - logrange-0.1.0.tgz
     version: 0.1.0
-generated: 2019-03-26T17:26:45.122548-07:00
+generated: 2019-03-26T18:44:06.140991-07:00
