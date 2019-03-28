@@ -40,7 +40,15 @@ Execute steps in order:
 `kubectl edit configmap forwarder --namespace=kube-system`
 
 2. Insert into `Workers` array, one or more blocks like shown below (substitute values in brackets):
-    ```json
+    ```javascript
+    
+       //    
+       // Note: Only syslog protocol is supported for for now...
+       //
+       // <NAME>             : name of your forwarder, e.g. "forwarder1"
+       // <REMOTE_SYSLOG>    : syslog server hostname/ip to where logs to be forwarded, 
+       //                      e.g. "log-collector.kube-system.svc.cluster.local"
+    
         {
           "Name": "<NAME>",
           "Stream": {
