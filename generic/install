@@ -63,7 +63,10 @@ if [[ ! -f ${INSTALL_FILE} ]]; then
 
     node=$(get_labeled_node ${LOGRANG_LABL})
     check $?
-    if [[ ${node} == "null" ]]; then
+
+    if [[ ${node} != "null" ]]; then
+       echo "Using node=${node} with ${LOGRANG_LABL} label..."
+    else
         node=$(get_labeled_node)
         check $?
         if [[ ${node} != "null" ]]; then
@@ -98,13 +101,16 @@ else
         check $?
     done < ${INSTALL_FILE}
 
-    node=$(get_labeled_node ${LOGRANG_LABL})
-    check $?
-    if [[ ${node} != "null" ]]; then
-        echo "Removing ${LOGRANG_LABL} label from node=${node}..."
-        del_node_label ${node} ${LOGRANG_LABL}
-        check $?
-    fi
+#
+# No label remove, until data is removed...
+#
+#    node=$(get_labeled_node ${LOGRANG_LABL})
+#    check $?
+#    if [[ ${node} != "null" ]]; then
+#        echo "Removing ${LOGRANG_LABL} label from node=${node}..."
+#        del_node_label ${node} ${LOGRANG_LABL}
+#        check $?
+#    fi
 
     echo "Removing ${INSTALL_FILE} file..."
     rm ${INSTALL_FILE}
