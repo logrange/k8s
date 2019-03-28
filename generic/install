@@ -34,7 +34,7 @@ function del_node_label() {
 function prompt() {
     msg=$1
     echo "${msg} (yes/no)"
-    read answer
+    read answer </dev/tty
     if [[ ${answer} != "yes" ]]; then
         exit 0
     fi
