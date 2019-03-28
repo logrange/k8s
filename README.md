@@ -2,7 +2,7 @@
 
 #### Automatic:
 
-Launch our installation script:
+Launch our installation script:<br/>
 `curl -s https://raw.githubusercontent.com/logrange/k8s/master/generic/install | bash`
 
 #### Manual:
