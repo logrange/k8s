@@ -1,11 +1,11 @@
 ### Logrange k8s installation
 
-##### Script:
+#### Script:
 
 Launch installation script:<br/>
 `curl -s https://raw.githubusercontent.com/logrange/k8s/master/generic/install | bash`
 
-##### Manual:
+#### Manual:
 
 Execute steps in order:
 
