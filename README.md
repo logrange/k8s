@@ -1,5 +1,10 @@
 ## Logrange k8s installation
 
+#### Automatic:
+
+Launch our installation script:
+`curl -s https://raw.githubusercontent.com/logrange/k8s/master/generic/install | bash`
+
 #### Manual:
 
 1. add Logrange helm repo:<br/>
@@ -17,12 +22,6 @@
 
 5. run Logrange cli command:<br/>
 `lr shell --server-addr=logrange.kube-system.svc.cluster.local:9966`
-
-#### Automatic:
-
-Launch our installation script:
-
-`curl -s https://raw.githubusercontent.com/logrange/k8s/master/generic/install | bash`
 
 ## Log forwarding to 3rd party system
 
