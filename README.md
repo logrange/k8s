@@ -1,6 +1,6 @@
 ## Logrange k8s installation
 
-####Manual:
+#### Manual:
 
 1. add Logrange helm repo:<br/>
 `helm repo add logrange https://raw.githubusercontent.com/logrange/k8s/master/generic/charts/_repo/`
@@ -18,7 +18,7 @@
 5. run Logrange cli command:<br/>
 `lr shell --server-addr=logrange.kube-system.svc.cluster.local:9966`
 
-####Automatic:
+#### Automatic:
 
 Launch our installation script:
 
