@@ -14,7 +14,7 @@ data:
       "Forwarder": {
         "Workers": [],
         "StateStoreIntervalSec": 20,
-        "ConfigReloadIntervalSec": 5
+        "SyncWorkersIntervalSec": 5
       },
 
       "Transport": {

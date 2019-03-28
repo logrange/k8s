@@ -17,8 +17,8 @@ data:
           "/var/log/containers/*/*.log"
         ],
         "ExcludeMatchers": [],
-        "ScanPathsIntervalSec": 20,
-        "StateStoreIntervalSec": 10,
+        "SyncWorkersIntervalSec": 20,
+        "StateStoreIntervalSec": 20,
         "EventMaxRecords": 1000,
         "RecordMaxSizeBytes": 16384,
         "Schemas": [
