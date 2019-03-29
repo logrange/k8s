@@ -24,7 +24,7 @@ data:
       },
       "JrnlCtrlConfig": {
         "JournalsDir": "/var/lib/logrange/db/",
-        "MaxOpenFileDescs": 5000,
+        "MaxOpenFileDescs": 500,
         "CheckFullScan": false,
         "RecoverDisabled": false,
         "RecoverLostDataOk": false,
