@@ -1,53 +1,14 @@
 apiVersion: v1
 entries:
-  collector:
-  - apiVersion: v1
-    appVersion: "1.0"
-    created: 2019-03-28T19:33:55.721103-07:00
-    description: Log collector agent
-    digest: 71846dd680355da6d17d2eb63ffad1c9f456cdd230d39ae1656aad4934538bc4
-    home: https://github.com/logrange
-    keywords:
-    - logging
-    - logs
-    - analytics
-    - agent
-    - collector
-    maintainers:
-    - email: mail@logrange.io
-      name: The logrange authors
-    name: collector
-    urls:
-    - collector-0.1.0.tgz
-    version: 0.1.0
-  forwarder:
-  - apiVersion: v1
-    appVersion: "1.0"
-    created: 2019-03-28T19:33:55.721346-07:00
-    description: Log forwarding agent
-    digest: 7344c92c95cd37f28639a32fb84731496918c246c4212fe4d87f729d27164329
-    home: https://github.com/logrange
-    keywords:
-    - logging
-    - logs
-    - analytics
-    - agent
-    - forwarder
-    maintainers:
-    - email: mail@logrange.io
-      name: The logrange authors
-    name: forwarder
-    urls:
-    - forwarder-0.1.0.tgz
-    version: 0.1.0
   logrange:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-03-28T19:33:55.721601-07:00
+    created: 2019-04-12T12:33:42.997972-07:00
     description: Log aggregation storage
-    digest: fd0824de6fc31803c9a71d02e1ec95d6e06a7e1a14733cb7e566b67babc368e3
+    digest: 9178d96be9b100185b01bba4d5176b83a33b8a113ea1215311d60f9607560657
     home: https://github.com/logrange
     keywords:
+    - logrange
     - logging
     - logs
     - analytics
@@ -60,4 +21,66 @@ entries:
     urls:
     - logrange-0.1.0.tgz
     version: 0.1.0
-generated: 2019-03-28T19:33:55.720368-07:00
+  lr-collector:
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: 2019-04-12T12:33:42.998202-07:00
+    description: Log collector agent
+    digest: ecb7881f541e5ce700dd4c3b0c07bc77e86a2990cbfe4c3af1f61ea714b0b393
+    home: https://github.com/logrange
+    keywords:
+    - logrange
+    - logging
+    - logs
+    - analytics
+    - agent
+    - collector
+    maintainers:
+    - email: mail@logrange.io
+      name: The logrange authors
+    name: lr-collector
+    urls:
+    - lr-collector-0.1.0.tgz
+    version: 0.1.0
+  lr-configs:
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: 2019-04-12T12:33:42.998528-07:00
+    description: K8s configs
+    digest: bf4f77ba5a10f4104e746915430131bd1126c2f374bb6987f54e2b8bb4b0fa79
+    home: https://github.com/logrange
+    keywords:
+    - logrange
+    - logging
+    - logs
+    - analytics
+    - configs
+    maintainers:
+    - email: mail@logrange.io
+      name: The logrange authors
+    name: lr-configs
+    urls:
+    - lr-configs-0.1.0.tgz
+    version: 0.1.0
+  lr-forwarder:
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: 2019-04-12T12:33:42.998714-07:00
+    description: Log forwarding agent
+    digest: 2c6d27a0761c3097224d8f2b41cbf69429e0afc471d2a3e66506575540c50336
+    home: https://github.com/logrange
+    keywords:
+    - logrange
+    - logging
+    - logs
+    - analytics
+    - agent
+    - forwarder
+    maintainers:
+    - email: mail@logrange.io
+      name: The logrange authors
+    name: lr-forwarder
+    urls:
+    - lr-forwarder-0.1.0.tgz
+    version: 0.1.0
+generated: 2019-04-12T12:33:42.997037-07:00

@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ template "collector.name" . }}
+  name: lr-collector
   namespace: kube-system
   labels:
     heritage: {{ .Release.Service }}
     release: {{ .Release.Name }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version }}
-    app: {{ template "collector.name" . }}
+    app: lr-collector
 data:
   collect.json: |
     {

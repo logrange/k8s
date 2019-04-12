@@ -1,14 +1,14 @@
 apiVersion: v1
 appVersion: "1.0"
-name: collector
-description: Log collector agent
+name: lr-configs
+description: K8s configs
 version: 0.1.0
 keywords:
+  - logrange
   - logging
   - logs
   - analytics
-  - agent
-  - collector
+  - configs
 home: https://github.com/logrange
 maintainers:
   - name: The logrange authors

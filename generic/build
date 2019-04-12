@@ -66,10 +66,13 @@ done
 echo "Updating helm repository..."
 cd ${CUR_PATH}/charts/_repo/
 
-helm package ../collector --save=false
+helm package ../lr-configs --save=false
 check $?
 
-helm package ../forwarder --save=false
+helm package ../lr-collector --save=false
+check $?
+
+helm package ../lr-forwarder --save=false
 check $?
 
 helm package ../logrange --save=false

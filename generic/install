@@ -76,6 +76,11 @@ if [[ ! -f ${INSTALL_FILE} ]]; then
         fi
     fi
 
+    echo "Installing helm logrange/configs..."
+    out=$(helm install logrange/configs)
+    check $?
+    save "${out}"
+
     echo "Installing helm logrange/logrange..."
     out=$(helm install logrange/logrange)
     check $?
