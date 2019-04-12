@@ -58,7 +58,7 @@ if [[ ! -f ${INSTALL_FILE} ]]; then
     prompt "No logrange installation found, proceed with installation?"
 
     echo "Adding helm repo..."
-    out=$(helm repo add logrange https://raw.githubusercontent.com/logrange/k8s/master/generic/charts/_repo/)
+    out=$(helm repo add logrange https://raw.githubusercontent.com/logrange/k8s/master/charts/_repo/)
     check $?
 
     node=$(get_labeled_node ${LOGRANG_LABL})
