@@ -76,8 +76,8 @@ if [[ ! -f ${INSTALL_FILE} ]]; then
         fi
     fi
 
-    echo "Installing helm logrange/configs..."
-    out=$(helm install logrange/configs)
+    echo "Installing helm logrange/lr-configs..."
+    out=$(helm install logrange/lr-configs)
     check $?
     save "${out}"
 
@@ -86,13 +86,13 @@ if [[ ! -f ${INSTALL_FILE} ]]; then
     check $?
     save "${out}"
 
-    echo "Installing helm logrange/collector..."
-    out=$(helm install logrange/collector)
+    echo "Installing helm logrange/lr-collector..."
+    out=$(helm install logrange/lr-collector)
     check $?
     save "${out}"
 
-    echo "Installing helm logrange/forwarder..."
-    out=$(helm install logrange/forwarder)
+    echo "Installing helm logrange/lr-forwarder..."
+    out=$(helm install logrange/lr-forwarder)
     check $?
     save "${out}"
 
