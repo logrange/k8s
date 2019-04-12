@@ -81,8 +81,8 @@ if [[ ! -f ${INSTALL_FILE} ]]; then
     check $?
     save "${out}"
 
-    echo "Installing helm logrange/logrange..."
-    out=$(helm install logrange/logrange)
+    echo "Installing helm logrange/lr-logrange..."
+    out=$(helm install logrange/lr-logrange)
     check $?
     save "${out}"
 

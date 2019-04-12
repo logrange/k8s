@@ -24,15 +24,11 @@ if [[ -z ${BRANCH} ]]; then
     BRANCH="master"
 fi
 
-BLD_SCPT="https://raw.githubusercontent.com/logrange/logrange/${BRANCH}/build/build"
+BLD_SCPT="${CUR_PATH}/build_binaries"
 cd ${TMP_PATH}
 
-echo "Downloading build script '${BLD_SCPT}'..."
-curl -sOfL ${BLD_SCPT}
-check $?
-
 echo "Building binaries..."
-chmod +x build && ./build ${BRANCH}
+chmod +x ${BLD_SCPT} && ${BLD_SCPT}  ${BRANCH}
 check $?
 
 VERSION=${BRANCH}
@@ -41,7 +37,7 @@ if [[ ${VERSION} == "master" ]]; then
 fi
 
 echo "Building docker images..."
-for name_binary in "collector/lr" "forwarder/lr" "logrange/logrange"
+for name_binary in "collector/lr" "forwarder/lr" "logrange/logrange" "gravity/gravity"
 do
     a=(${name_binary//\// })
     n=${a[0]}
@@ -69,13 +65,16 @@ cd ${CUR_PATH}/charts/_repo/
 helm package ../lr-configs --save=false
 check $?
 
+helm package ../lr-logrange --save=false
+check $?
+
 helm package ../lr-collector --save=false
 check $?
 
 helm package ../lr-forwarder --save=false
 check $?
 
-helm package ../logrange --save=false
+helm package ../lr-gravity --save=false
 check $?
 
 helm repo index .

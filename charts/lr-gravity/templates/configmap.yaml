@@ -1,37 +1,66 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: lr-forwarder
+  name: {{ template "gravity.name" . }}
   namespace: kube-system
   labels:
     heritage: {{ .Release.Service }}
     release: {{ .Release.Name }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version }}
-    app: lr-forwarder
+    app: {{ template "gravity.name" . }}
 data:
-  forward.json: |
+  adapter.json: |
     {
-      "Forwarder": {
-        "Workers": [],
-        "StateStoreIntervalSec": 20,
-        "SyncWorkersIntervalSec": 5
+      "Gravity": {
+        "ApiListenAddr": "0.0.0.0:8083",
+        "Kubernetes": {
+          "Namespace": "kube-system",
+          "ForwarderConfigMapName": "log-forwarders"
+        }
       },
 
-      "Transport": {
-        "ListenAddr": "logrange.kube-system.svc.cluster.local:9966",
-        "TlsEnabled": false,
-        "Tls2Way": false,
-        "TlsCertFile": "/opt/logrange/lr/tls/client.crt",
-        "TlsKeyFile": "/opt/logrange/lr/tls/client.key",
-        "TlsCAFile": "/opt/logrange/lr/tls/ca.pem"
+      "Logrange": {
+        "PipeName": "logrange.pipe=__default__",
+        "ForwarderConfigTmplFile": "/opt/logrange/gravity/config/forward-tmpl.json",
+        "Kubernetes": {
+          "Namespace": "kube-system",
+          "ForwarderConfigMap": "lr-forwarder"
+        },
+        "Transport": {
+          "ListenAddr": "logrange.kube-system.svc.cluster.local:9966",
+          "TlsEnabled": false,
+          "Tls2Way": false,
+          "TlsCertFile": "/opt/logrange/gravity/config/tls/client.crt",
+          "TlsKeyFile": "/opt/logrange/gravity/config/tls/client.key",
+          "TlsCAFile": "/opt/logrange/gravity/config/tls/ca.pem"
+        }
       },
 
-      "Storage": {
-        "Type": "file",
-        "Location": "/var/lib/logrange/lr/storage/"
-      }
+      "SyncIntervalSec": 5
     }
 
+  forward-tmpl.json: |
+    {
+      "Name": "",
+      "Pipe": {
+        "Name": "logrange.pipe=__default__"
+      },
+      "Sink": {
+        "Type": "syslog",
+        "Params": {
+          "Protocol": "tcp",
+          "RemoteAddr": "",
+          "TlsCAFile": "",
+          "MessageSchema" : {
+            "Facility": "local6",
+            "Severity": "info",
+            "Hostname": "lr-forwarder",
+            "Tags": "{vars:pod}_{vars:ns}_{vars:cname}-{vars:cid}.log",
+            "Msg": "{\"time\":\"{ts.format(2006-01-02T15:04:05.999999Z07:00)}\"}, \"stream\":\"{vars:stream}\", \"log\":{msg.json()}}"
+          }
+        }
+      }
+    }
 
   log4g.properties: |
     # Console appender

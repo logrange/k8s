@@ -40,9 +40,9 @@ data:
         "ListenAddr": "logrange.kube-system.svc.cluster.local:9966",
         "TlsEnabled": false,
         "Tls2Way": false,
-        "TlsCertFile": "/opt/logrange/lr/tls/client.crt",
-        "TlsKeyFile": "/opt/logrange/lr/tls/client.key",
-        "TlsCAFile": "/opt/logrange/lr/tls/ca.pem"
+        "TlsCertFile": "/opt/logrange/lr/config/tls/client.crt",
+        "TlsKeyFile": "/opt/logrange/lr/config/tls/client.key",
+        "TlsCAFile": "/opt/logrange/lr/config/tls/ca.pem"
       },
       "Storage": {
         "Type": "file",

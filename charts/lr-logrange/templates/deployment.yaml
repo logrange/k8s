@@ -36,11 +36,7 @@ spec:
               containerPort: 9966
           volumeMounts:
             - name: config
-              mountPath: /opt/logrange/logrange.json
-              subPath: logrange.json
-            - name: config
-              mountPath: /opt/logrange/log4g.properties
-              subPath: log4g.properties
+              mountPath: /opt/logrange/config
 {{- range $key, $val := .Values.volumes }}
             - name: {{ $key }}
               mountPath: {{ $val }}
