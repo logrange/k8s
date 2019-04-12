@@ -3,9 +3,9 @@ entries:
   logrange:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-04-12T12:33:42.997972-07:00
+    created: 2019-04-12T13:00:48.176126-07:00
     description: Log aggregation storage
-    digest: 9178d96be9b100185b01bba4d5176b83a33b8a113ea1215311d60f9607560657
+    digest: 240bca594e38784a3c909faa7839772e9587c7da4c90b71f8b36ebcfcd7551f2
     home: https://github.com/logrange
     keywords:
     - logrange
@@ -24,9 +24,9 @@ entries:
   lr-collector:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-04-12T12:33:42.998202-07:00
+    created: 2019-04-12T13:00:48.176328-07:00
     description: Log collector agent
-    digest: ecb7881f541e5ce700dd4c3b0c07bc77e86a2990cbfe4c3af1f61ea714b0b393
+    digest: aab2bd82bd2eacd274e85f539a063a42878bc73feb83ead3ee06f043ff2a6f35
     home: https://github.com/logrange
     keywords:
     - logrange
@@ -45,9 +45,9 @@ entries:
   lr-configs:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-04-12T12:33:42.998528-07:00
+    created: 2019-04-12T13:00:48.176555-07:00
     description: K8s configs
-    digest: bf4f77ba5a10f4104e746915430131bd1126c2f374bb6987f54e2b8bb4b0fa79
+    digest: 4fe416d48464fb2b4917ce934d92da5aa6e67b107cfc5fe49c7011e43679f48a
     home: https://github.com/logrange
     keywords:
     - logrange
@@ -65,9 +65,9 @@ entries:
   lr-forwarder:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-04-12T12:33:42.998714-07:00
+    created: 2019-04-12T13:00:48.177888-07:00
     description: Log forwarding agent
-    digest: 2c6d27a0761c3097224d8f2b41cbf69429e0afc471d2a3e66506575540c50336
+    digest: d3de805fbac8c7102e7c5e28fbe5a33cc7149ef9a48e26bb22ae91f6942faa7e
     home: https://github.com/logrange
     keywords:
     - logrange
@@ -83,4 +83,4 @@ entries:
     urls:
     - lr-forwarder-0.1.0.tgz
     version: 0.1.0
-generated: 2019-04-12T12:33:42.997037-07:00
+generated: 2019-04-12T13:00:48.174729-07:00

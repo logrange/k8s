@@ -47,7 +47,7 @@ do
     n=${a[0]}
     b=${a[1]}
 
-    cp ${TMP_PATH}/binaries/linux/x86_64/${b} ${CUR_PATH}/images/${n}
+    cp ${TMP_PATH}/linux/x86_64/${b} ${CUR_PATH}/images/${n}
     check $?
 
     cd ${CUR_PATH}/images/${n}
