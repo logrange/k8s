@@ -13,7 +13,7 @@ metadata:
     heritage: {{ .Release.Service }}
     release: {{ .Release.Name }}
 spec:
-  type: {{ .Values.service.type }}]
+  type: {{ .Values.service.type }}
   ports:
     - name: rest
       protocol: TCP
