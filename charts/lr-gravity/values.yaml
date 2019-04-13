@@ -8,6 +8,11 @@ image:
   tag: latest
   pullPolicy: Always
 
+service:
+  annotations: {}
+  type: ClusterIP
+  port: 8083
+
 volumes:
   varlib: /var/lib
   varlog: /var/log

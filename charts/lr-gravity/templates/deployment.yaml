@@ -30,6 +30,10 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: rest
+              protocol: TCP
+              containerPort: 8083
           volumeMounts:
             - name: config
               mountPath: /opt/logrange/gravity/config

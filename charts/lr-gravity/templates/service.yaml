@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "gravity.name" . }}
+  namespace: kube-system
+{{- with .Values.service.annotations }}
+  annotations:
+{{ toYaml . | indent 4 }}
+{{- end }}
+  labels:
+    app: {{ template "gravity.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+spec:
+  type: {{ .Values.service.type }}]
+  ports:
+    - name: rest
+      protocol: TCP
+      port: {{ .Values.service.port }}
+  selector:
+    app: {{ template "gravity.name" . }}
+    release: {{ .Release.Name }}
