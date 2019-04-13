@@ -65,7 +65,7 @@ cd ${CUR_PATH}/charts/_repo/
 helm package ../lr-configs --save=false
 check $?
 
-helm package ../lr-logrange --save=false
+helm package ../lr-aggregator --save=false
 check $?
 
 helm package ../lr-collector --save=false

@@ -37,7 +37,7 @@ data:
         ]
       },
       "Transport": {
-        "ListenAddr": "logrange.kube-system.svc.cluster.local:9966",
+        "ListenAddr": "lr-aggregator.kube-system.svc.cluster.local:9966",
         "TlsEnabled": false,
         "Tls2Way": false,
         "TlsCertFile": "/opt/logrange/lr/config/tls/client.crt",
