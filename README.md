@@ -3,14 +3,14 @@
 #### Script:
 
 Launch installation script:<br/>
-`curl -s https://raw.githubusercontent.com/logrange/k8s/master/generic/install | bash`
+`curl -s https://raw.githubusercontent.com/logrange/k8s/master/install | bash`
 
 #### Manual:
 
 Execute steps in order:
 
 1. add Logrange helm repo:<br/>
-`helm repo add logrange https://raw.githubusercontent.com/logrange/k8s/master/generic/charts/_repo/`
+`helm repo add logrange https://raw.githubusercontent.com/logrange/k8s/master/charts/_repo/`
 
 2. install Logrange storage:<br/>
     a) `kubectl label nodes <NODE_NAME> logrange.io/node=`<br/>
