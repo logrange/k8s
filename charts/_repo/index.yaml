@@ -3,9 +3,9 @@ entries:
   lr-aggregator:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-04-12T17:51:41.244833-07:00
+    created: 2019-04-12T17:58:04.750862-07:00
     description: Log aggregation storage
-    digest: 6ac1067cbae7851b5a47eb2799a06e743b3044794601f01e5a4fdda3fd5cfe01
+    digest: 3e7e86d1f3a92a69dd0b3c20ba0d03acaafd2694f77eaf9c7684b5eca36c5e6a
     home: https://github.com/logrange
     keywords:
     - logrange
@@ -24,9 +24,9 @@ entries:
   lr-collector:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-04-12T17:51:41.245632-07:00
+    created: 2019-04-12T17:58:04.751094-07:00
     description: Log collector agent
-    digest: dbd890371c7cdf538bb26f2657b158930d0369480d2d4057e0c2c41204b597a6
+    digest: fa9da47b9e05d718809433485111b6444083c499dd965341416a4d2f4b47c707
     home: https://github.com/logrange
     keywords:
     - logrange
@@ -45,9 +45,9 @@ entries:
   lr-configs:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-04-12T17:51:41.245869-07:00
+    created: 2019-04-12T17:58:04.751368-07:00
     description: K8s configs
-    digest: b779f66959f161dba920904cbb38eca25b1af00c7d45e8422125a5c579e982a3
+    digest: 6c1e8948f5b243eb7496c2ef8d73628c00cd69342637cee0145ddb7445b2c32d
     home: https://github.com/logrange
     keywords:
     - logrange
@@ -65,9 +65,9 @@ entries:
   lr-forwarder:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-04-12T17:51:41.246076-07:00
+    created: 2019-04-12T17:58:04.751707-07:00
     description: Log forwarding agent
-    digest: ae1720803fba054b2368c619ff0523d1b2129250b82e1feeb91a5de58d19dad4
+    digest: d9d74080b208630f45febf98f3ed3b58735f0f00fac70ed0cfd45e058ed18b37
     home: https://github.com/logrange
     keywords:
     - logrange
@@ -86,9 +86,9 @@ entries:
   lr-gravity:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-04-12T17:51:41.246307-07:00
+    created: 2019-04-12T17:58:04.753164-07:00
     description: Gravity adapter
-    digest: 8926560770f533dccdfab81aceccd3e129696e9abf7d014c55755a4ddfb45f17
+    digest: 33fd333218aefd4a211e0ba99502883685494edb21176eef1409a8a7705e6199
     home: https://github.com/logrange
     keywords:
     - logrange
@@ -103,4 +103,4 @@ entries:
     urls:
     - lr-gravity-0.1.0.tgz
     version: 0.1.0
-generated: 2019-04-12T17:51:41.243203-07:00
+generated: 2019-04-12T17:58:04.749198-07:00
