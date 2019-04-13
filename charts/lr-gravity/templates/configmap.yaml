@@ -21,7 +21,7 @@ data:
 
       "Logrange": {
         "PipeName": "logrange.pipe=__default__",
-        "ForwarderConfigTmplFile": "/opt/logrange/gravity/config/forward-tmpl.json",
+        "ForwarderTmplFile": "/opt/logrange/gravity/config/forward-tmpl.json",
         "Kubernetes": {
           "Namespace": "kube-system",
           "ForwarderConfigMap": "lr-forwarder"
