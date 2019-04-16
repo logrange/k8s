@@ -32,6 +32,13 @@ data:
         "WriteFlushMs": 500,
         "MaxChunkSize": 104857600,
         "MaxRecordSize": 1048576
+      },
+      "PipesConfig": {
+        "EnsureAtStart": [
+          {
+            "Name": "__default__"
+          }
+        ]
       }
     }
 
