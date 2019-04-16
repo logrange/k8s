@@ -22,6 +22,16 @@ Execute steps in order:
 4. install Logrange forwarding agent:<br/>
 `helm install logrange/forwarder`
 
+### Logrange CLI installation
+
+Execute steps in order:
+
+1. install Logrange cli command:<br/>
+`curl -s http://get.logrange.io/install | bash`
+
+2. run Logrange shell:<br/>
+`lr shell --server-addr=logrange.kube-system.svc.cluster.local:9966`
+
 ### Log forwarding to 3rd party system
 
 Execute steps in order:
