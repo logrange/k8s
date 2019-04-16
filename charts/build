@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+function cleanup {
+    echo "Cleaning up..."
+    rm -rf ${TMP_PATH}
+}
+
+function check {
+    code=$1;
+    if [[ ${code} -ne 0 ]]; then
+        echo "ERROR!"
+        exit ${code}
+    fi
+}
+
+################# Main #################
+
+TMP_PATH=$(mktemp -d)
+trap cleanup EXIT
+
+SRC_PATH=$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)
+echo "Updating helm repository..."
+
+cd ${TMP_PATH}
+check $?
+
+for chart in "lr-configs" "lr-aggregator" "lr-collector" "lr-forwarder" "lr-gravity"
+do
+    helm package ${SRC_PATH}/${chart} --save=false
+    check $?
+done
+
+helm repo index .
+check $?
+
+echo "Uploading helm repo to s3://get.logrange.io/k8s/helm..."
+aws s3 cp ./ s3://get.logrange.io/k8s/helm --recursive
+check $?

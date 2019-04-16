@@ -8,12 +8,6 @@ function check {
     fi
 }
 
-function save {
-    out="$1"
-    name=$(echo "${out}" | head -n 1 | awk -F ':' '{print $2}' | tr -d " ")
-    echo ${name} >> ${INSTALL_FILE}
-}
-
 function get_labeled_node() {
     label=$1
     kubectl get nodes --output=json --selector=${label} | jq -r '.items[0].metadata.name'
@@ -22,103 +16,128 @@ function get_labeled_node() {
 function add_node_label() {
     node=$1
     label=$2
-    kubectl label nodes ${node} ${label}= > /dev/nul
+    kubectl label nodes ${node} ${label}= >/dev/nul
 }
 
 function del_node_label() {
     node=$1
     label=$2
-    kubectl label nodes ${node} ${label}- > /dev/nul
-}
-
-function prompt() {
-    msg=$1
-    echo "${msg} (yes/no)"
-    read answer </dev/tty
-    if [[ ${answer} != "yes" ]]; then
-        exit 0
-    fi
+    kubectl label nodes ${node} ${label}- >/dev/nul
 }
 
 ################# Main #################
 
-INSTALL_FILE=~/.logrange
-LOGRANG_LABL="logrange.io/node"
+while [[ "$1" != "" ]]; do
+    case $1 in
+        -i|--install)
+            MODE=1
+            ;;
+        -u|--uninstall)
+            MODE=2
+            ;;
+        -c|--wipe)
+            WIPE=true
+            ;;
+        -s|--set)
+            shift
+            SET=$1
+            ;;
+        *)
+            echo "Unknown argument passed!"
+            exit 1
+            ;;
+    esac
+    shift
+done
+
+if [[ -z ${MODE} ]]; then
+    MODE=1
+fi
+
+if [[ -z ${SET} ]]; then
+    SET="generic"
+fi
+
+if [[ ${MODE} -eq 1 ]] && [[ "${SET}" != "generic" ]] && [[ "${SET}" != "gravity" ]]; then
+    echo "--set must be either 'generic' or 'gravity'!"
+    exit 1
+fi
+
+LGR_LABEL="logrange.io/node"
+LGR_CONFS="lr-configs"
+LGR_COMPS="lr-aggregator lr-collector lr-forwarder"
+GRV_COMPS="lr-gravity"
 
 echo "Checking helm..."
-helm init --client-only > /dev/null
+helm init --client-only >/dev/null
 check $?
 
 echo "Checking kubectl..."
-kubectl cluster-info > /dev/null
+kubectl cluster-info >/dev/null
 check $?
 
 ### install
-if [[ ! -f ${INSTALL_FILE} ]]; then
-    prompt "No logrange installation found, proceed with installation?"
-
+if [[ ${MODE} -eq 1 ]]; then
     echo "Adding helm repo..."
-    out=$(helm repo add logrange https://raw.githubusercontent.com/logrange/k8s/master/charts/_repo/ && helm repo update)
+    out=$(helm repo add logrange http://get.logrange.io/k8s/helm/ && helm repo update)
     check $?
 
-    node=$(get_labeled_node ${LOGRANG_LABL})
+    node=$(get_labeled_node ${LGR_LABEL})
     check $?
 
     if [[ ${node} != "null" ]]; then
-       echo "Using node=${node} with ${LOGRANG_LABL} label..."
+       echo "Using node=${node} with ${LGR_LABEL} label..."
     else
         node=$(get_labeled_node)
         check $?
         if [[ ${node} != "null" ]]; then
-            echo "Adding ${LOGRANG_LABL} label to node=${node}..."
-            add_node_label ${node} ${LOGRANG_LABL}
+            echo "Adding ${LGR_LABEL} label to node=${node}..."
+            add_node_label ${node} ${LGR_LABEL}
             check $?
         fi
     fi
 
-    echo "Installing helm logrange/lr-configs..."
-    out=$(helm install logrange/lr-configs)
-    check $?
-    save "${out}"
+    COMPS="${LGR_CONFS} ${LGR_COMPS}";
+    if [[ "${SET}" == "gravity" ]]; then
+        COMPS="${COMPS} ${GRV_COMPS}";
+    fi
 
-    echo "Installing helm logrange/lr-aggregator..."
-    out=$(helm install logrange/lr-aggregator)
-    check $?
-    save "${out}"
-
-    echo "Installing helm logrange/lr-collector..."
-    out=$(helm install logrange/lr-collector)
-    check $?
-    save "${out}"
-
-    echo "Installing helm logrange/lr-forwarder..."
-    out=$(helm install logrange/lr-forwarder)
-    check $?
-    save "${out}"
+    for comp in ${COMPS}; do
+        echo "Installing ${comp}..."
+        helm status ${comp} >/dev/null 2>&1
+        if [[ $? -eq 0 ]]; then
+            echo "Already installed, skipping..."
+            continue
+        fi
+        helm install logrange/${comp} --name ${comp} >/dev/null
+        check $?
+    done
 
 ### remove
 else
-    prompt "Existing logrange installation found, proceed with removal?"
 
-    while IFS='' read -r line || [[ -n "$line" ]]; do
-        echo "Removing helm ${line}..."
-        helm delete ${line} > /dev/nul
+    COMPS="${LGR_COMPS} ${GRV_COMPS}";
+    if [[ "${WIPE}" == true ]]; then
+        COMPS="${COMPS} ${LGR_CONFS}";
+        node=$(get_labeled_node ${LGR_LABEL})
         check $?
-    done < ${INSTALL_FILE}
+        if [[ ${node} != "null" ]]; then
+            echo "Removing ${LGR_LABEL} label from node=${node}..."
+            del_node_label ${node} ${LGR_LABEL}
+            check $?
+        fi
+    fi
 
-#
-# No label remove, until data is removed...
-#
-#    node=$(get_labeled_node ${LOGRANG_LABL})
-#    check $?
-#    if [[ ${node} != "null" ]]; then
-#        echo "Removing ${LOGRANG_LABL} label from node=${node}..."
-#        del_node_label ${node} ${LOGRANG_LABL}
-#        check $?
-#    fi
-
-    echo "Removing ${INSTALL_FILE} file..."
-    rm ${INSTALL_FILE}
+    for comp in ${COMPS}; do
+        echo "Uninstalling ${comp}..."
+        helm status ${comp} >/dev/null 2>&1
+        if [[ $? -ne 0 ]]; then
+            echo "Not found, skipping..."
+            continue
+        fi
+        helm delete --purge ${comp} >/dev/null
+        check $?
+    done
 fi
 
 echo "Done!"

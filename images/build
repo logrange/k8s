@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+
+function check {
+    code=$1;
+    if [[ ${code} -ne 0 ]]; then
+        echo "ERROR!"
+        exit ${code}
+    fi
+}
+
+################# Main #################
+
+while [[ "$1" != "" ]]; do
+    case $1 in
+        -b|--branch)
+            shift
+            BRANCH=$1
+            ;;
+        *)
+            echo "Unknown argument passed!"
+            exit 1
+            ;;
+    esac
+    shift
+done
+
+if [[ -z ${BRANCH} ]]; then
+    BRANCH="master"
+fi
+
+VERSION=${BRANCH}
+if [[ ${VERSION} == "master" ]]; then
+    VERSION="latest"
+fi
+
+SRC_PATH=$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)
+echo "Building docker images..."
+
+for img_bin in "collector/lr" "forwarder/lr" "logrange/logrange" "gravity/gravity"
+do
+    arr=(${img_bin//\// })
+    img=${arr[0]}
+    bin=${arr[1]}
+
+    cd ${SRC_PATH}/${img}
+    check $?
+
+    curl -sOfL http://get.logrange.io/binaries/${BRANCH}/linux/x86_64/${bin} && chmod +x ${bin}
+    check $?
+
+    image=logrange/${img}:${VERSION}
+    echo "Building and pushing docker image '${image}'..."
+
+    docker build -t ${image} . >/dev/null 2>&1 && docker push ${image} >/dev/null 2>&1
+    check $?
+
+    rm -f ${SRC_PATH}/${img}/${bin}
+    check $?
+done
+
