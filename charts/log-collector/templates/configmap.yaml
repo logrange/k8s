@@ -20,8 +20,14 @@ data:
       },
 
       "Logrange": {
-        "PipeName": "logrange.pipe=__default__",
+        "Partition": "logrange.pipe=__default__",
         "ForwarderTmplFile": "/opt/logrange/gravity/config/forward-tmpl.json",
+        "CronQueries": [
+          {
+            "Query": "truncate minsize 10mb maxsize 1gb",
+            "PeriodSec": 60
+          }
+        ],
         "Kubernetes": {
           "Namespace": "kube-system",
           "ForwarderConfigMap": "lr-forwarder"

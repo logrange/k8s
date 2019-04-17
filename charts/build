@@ -24,7 +24,7 @@ echo "Updating helm repository..."
 cd ${TMP_PATH}
 check $?
 
-for chart in "lr-configs" "lr-aggregator" "lr-collector" "lr-forwarder" "lr-gravity"
+for chart in "lr-configs" "lr-aggregator" "lr-collector" "lr-forwarder" "log-collector"
 do
     helm package ${SRC_PATH}/${chart} --save=false
     check $?

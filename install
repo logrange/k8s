@@ -66,7 +66,7 @@ fi
 LGR_LABEL="logrange.io/node"
 LGR_CONFS="lr-configs"
 LGR_COMPS="lr-aggregator lr-collector lr-forwarder"
-GRV_COMPS="lr-gravity"
+GRV_COMPS="log-collector"
 
 echo "Checking helm..."
 helm init --client-only >/dev/null
