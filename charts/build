@@ -15,6 +15,19 @@ function check {
 
 ################# Main #################
 
+while [[ "$1" != "" ]]; do
+    case $1 in
+        -u|--upload)
+            UPLOAD=1
+            ;;
+        *)
+            echo "Unknown argument passed!"
+            exit 1
+            ;;
+    esac
+    shift
+done
+
 TMP_PATH=$(mktemp -d)
 trap cleanup EXIT
 
@@ -24,7 +37,7 @@ echo "Updating helm repository..."
 cd ${TMP_PATH}
 check $?
 
-for chart in "lr-configs" "lr-aggregator" "lr-collector" "lr-forwarder" "log-collector"
+for chart in "lr-configs" "lr-aggregator" "lr-collector" "lr-forwarder"
 do
     helm package ${SRC_PATH}/${chart} --save=false
     check $?
@@ -33,6 +46,8 @@ done
 helm repo index .
 check $?
 
-echo "Uploading helm repo to s3://get.logrange.io/k8s/helm..."
-aws s3 cp ./ s3://get.logrange.io/k8s/helm --recursive
-check $?
+if [[ ! -z ${UPLOAD} ]]; then
+    echo "Uploading helm repo to s3://get.logrange.io/k8s/helm..."
+    aws s3 cp ./ s3://get.logrange.io/k8s/helm --recursive
+    check $?
+fi

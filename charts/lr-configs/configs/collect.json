@@ -1,0 +1,39 @@
+{
+  "Collector": {
+    "IncludePaths": [
+      "/var/log/containers/*.log",
+      "/var/log/containers/*/*.log"
+    ],
+    "ExcludeMatchers": [],
+    "SyncWorkersIntervalSec": 20,
+    "StateStoreIntervalSec": 20,
+    "EventMaxRecords": 1000,
+    "RecordMaxSizeBytes": 16384,
+    "Schemas": [
+      {
+        "PathMatcher": "/*(?:.+/)*(?P<pod>.+)_(?P<ns>.+)_(?P<cname>.+)-(?P<cid>.+)\\..+",
+        "DataFormat": "k8json",
+        "Meta": {
+          "Tags": {
+            "pod": "{pod}",
+            "ns": "{ns}",
+            "cname": "{cname}",
+            "cid": "{cid}"
+          }
+        }
+      }
+    ]
+  },
+  "Transport": {
+    "ListenAddr": "lr-aggregator.kube-system.svc.cluster.local:9966",
+    "TlsEnabled": false,
+    "Tls2Way": false,
+    "TlsCertFile": "/opt/logrange/lr/config/tls/client.crt",
+    "TlsKeyFile": "/opt/logrange/lr/config/tls/client.key",
+    "TlsCAFile": "/opt/logrange/lr/config/tls/ca.pem"
+  },
+  "Storage": {
+    "Type": "file",
+    "Location": "/var/lib/logrange/lr/storage/"
+  }
+}

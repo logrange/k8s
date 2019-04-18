@@ -16,6 +16,9 @@ while [[ "$1" != "" ]]; do
             shift
             BRANCH=$1
             ;;
+        -u|--upload)
+            UPLOAD=1
+            ;;
         *)
             echo "Unknown argument passed!"
             exit 1
@@ -36,7 +39,7 @@ fi
 SRC_PATH=$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)
 echo "Building docker images..."
 
-for img_bin in "collector/lr" "forwarder/lr" "logrange/logrange" "gravity/gravity"
+for img_bin in "collector/lr" "forwarder/lr" "logrange/logrange"
 do
     arr=(${img_bin//\// })
     img=${arr[0]}
@@ -49,10 +52,15 @@ do
     check $?
 
     image=logrange/${img}:${VERSION}
-    echo "Building and pushing docker image '${image}'..."
-
-    docker build -t ${image} . >/dev/null 2>&1 && docker push ${image} >/dev/null 2>&1
+    echo "Building docker image '${image}'..."
+    docker build -t ${image} . >/dev/null 2>&1
     check $?
+
+    if [[ ! -z ${UPLOAD} ]]; then
+        echo "Pushing docker image '${image}'..."
+        docker push ${image} >/dev/null 2>&1
+        check $?
+    fi
 
     rm -f ${SRC_PATH}/${img}/${bin}
     check $?

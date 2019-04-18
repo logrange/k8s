@@ -38,10 +38,6 @@ while [[ "$1" != "" ]]; do
         -c|--wipe)
             WIPE=true
             ;;
-        -s|--set)
-            shift
-            SET=$1
-            ;;
         *)
             echo "Unknown argument passed!"
             exit 1
@@ -54,19 +50,14 @@ if [[ -z ${MODE} ]]; then
     MODE=1
 fi
 
-if [[ -z ${SET} ]]; then
-    SET="generic"
-fi
-
-if [[ ${MODE} -eq 1 ]] && [[ "${SET}" != "generic" ]] && [[ "${SET}" != "gravity" ]]; then
-    echo "--set must be either 'generic' or 'gravity'!"
+if [[ ${MODE} -eq 1 ]] && [[ "${WIPE}" ]]; then
+    echo "--wipe can be used with --uninstall only!"
     exit 1
 fi
 
 LGR_LABEL="logrange.io/node"
 LGR_CONFS="lr-configs"
 LGR_COMPS="lr-aggregator lr-collector lr-forwarder"
-GRV_COMPS="log-collector"
 
 echo "Checking helm..."
 helm init --client-only >/dev/null
@@ -98,10 +89,6 @@ if [[ ${MODE} -eq 1 ]]; then
     fi
 
     COMPS="${LGR_CONFS} ${LGR_COMPS}";
-    if [[ "${SET}" == "gravity" ]]; then
-        COMPS="${COMPS} ${GRV_COMPS}";
-    fi
-
     for comp in ${COMPS}; do
         echo "Installing ${comp}..."
         helm status ${comp} >/dev/null 2>&1
@@ -116,7 +103,7 @@ if [[ ${MODE} -eq 1 ]]; then
 ### remove
 else
 
-    COMPS="${LGR_COMPS} ${GRV_COMPS}";
+    COMPS="${LGR_COMPS}";
     if [[ "${WIPE}" == true ]]; then
         COMPS="${COMPS} ${LGR_CONFS}";
         node=$(get_labeled_node ${LGR_LABEL})

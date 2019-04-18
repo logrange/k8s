@@ -1,0 +1,31 @@
+{
+  "HostHostId": 0,
+  "HostLeaseTTLSec": 5,
+  "HostRegisterTimeoutSec": 0,
+  "PublicApiRpc": {
+    "ListenAddr": "0.0.0.0:9966",
+    "TlsEnabled": false,
+    "Tls2Way": false,
+    "TlsCertFile": "/opt/logrange/config/tls/server.crt",
+    "TlsKeyFile": "/opt/logrange/config/tls/server.key",
+    "TlsCAFile": "/opt/logrange/config/tls/ca.pem"
+  },
+  "JrnlCtrlConfig": {
+    "JournalsDir": "/var/lib/logrange/db/",
+    "MaxOpenFileDescs": 500,
+    "CheckFullScan": false,
+    "RecoverDisabled": false,
+    "RecoverLostDataOk": false,
+    "WriteIdleSec": 120,
+    "WriteFlushMs": 500,
+    "MaxChunkSize": 5000000,
+    "MaxRecordSize": 1048576
+  },
+  "PipesConfig": {
+    "EnsureAtStart": [
+      {
+        "Name": "__default__"
+      }
+    ]
+  }
+}

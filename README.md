@@ -3,9 +3,9 @@
 #### Script:
 
 Launch install script:<br/>
-`curl -s http://get.logrange.io/k8s/install | bash -s -- [--set generic|gravity]`
+`curl -s http://get.logrange.io/k8s/install | bash`
 
-Launch uninstall
+Launch uninstall script:<br/>
 `curl -s http://get.logrange.io/k8s/install | bash -s -- --uninstall [--wipe]`
 
 #### Manual:
