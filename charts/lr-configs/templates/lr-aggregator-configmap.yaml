@@ -30,7 +30,7 @@ data:
         "RecoverLostDataOk": false,
         "WriteIdleSec": 120,
         "WriteFlushMs": 500,
-        "MaxChunkSize": 104857600,
+        "MaxChunkSize": 5000000,
         "MaxRecordSize": 1048576
       },
       "PipesConfig": {

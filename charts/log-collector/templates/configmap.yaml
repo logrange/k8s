@@ -24,7 +24,7 @@ data:
         "ForwarderTmplFile": "/opt/logrange/gravity/config/forward-tmpl.json",
         "CronQueries": [
           {
-            "Query": "truncate minsize 10mb maxsize 1gb",
+            "Query": "truncate minsize 4mb maxsize 500mb maxdbsize 10gb",
             "PeriodSec": 60
           }
         ],
