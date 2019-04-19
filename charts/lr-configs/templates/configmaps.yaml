@@ -1,3 +1,4 @@
+---
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -9,10 +10,11 @@ metadata:
     chart: {{ .Chart.Name }}-{{ .Chart.Version }}
     app: lr-aggregator
 data:
-  logrange.json: |-
+  logrange.json: |
     {{ .Files.Get "configs/logrange.json" | nindent 4 }}
-  log4g.properties: |-
+  log4g.properties: |
     {{ .Files.Get "configs/log4g.properties" | nindent 4 }}
+
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -25,10 +27,11 @@ metadata:
     chart: {{ .Chart.Name }}-{{ .Chart.Version }}
     app: lr-collector
 data:
-  collect.json: |-
+  collect.json: |
     {{ .Files.Get "configs/collect.json" | nindent 4 }}
-  log4g.properties: |-
+  log4g.properties: |
     {{ .Files.Get "configs/log4g.properties" | nindent 4 }}
+
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -41,7 +44,7 @@ metadata:
     chart: {{ .Chart.Name }}-{{ .Chart.Version }}
     app: lr-forwarder
 data:
-  forward.json: |-
+  forward.json: |
     {{ .Files.Get "configs/forward.json" | nindent 4 }}
-  log4g.properties: |-
+  log4g.properties: |
     {{ .Files.Get "configs/log4g.properties" | nindent 4 }}
