@@ -12,9 +12,9 @@ function check {
 
 while [[ "$1" != "" ]]; do
     case $1 in
-        -b|--branch)
+        -v|--VERSION)
             shift
-            BRANCH=$1
+            VERSION=$1
             ;;
         -u|--upload)
             UPLOAD=1
@@ -27,12 +27,7 @@ while [[ "$1" != "" ]]; do
     shift
 done
 
-if [[ -z ${BRANCH} ]]; then
-    BRANCH="master"
-fi
-
-VERSION=${BRANCH}
-if [[ ${VERSION} == "master" ]]; then
+if [[ -z ${VERSION} ]]; then
     VERSION="latest"
 fi
 
@@ -48,7 +43,7 @@ do
     cd ${SRC_PATH}/${img}
     check $?
 
-    curl -sOfL http://get.logrange.io/binaries/${BRANCH}/linux/x86_64/${bin} && chmod +x ${bin}
+    curl -sOfL http://get.logrange.io/binaries/${VERSION}/linux/x86_64/${bin} && chmod +x ${bin}
     check $?
 
     image=logrange/${img}:${VERSION}
