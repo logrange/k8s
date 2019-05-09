@@ -7,8 +7,8 @@ image:
   pullPolicy: Always
 
 volumes:
-  varlib: /var/lib
   varlog: /var/log
+  varliblogrange: /var/lib/logrange
   extdockercontainers: /ext/docker/containers
 
 resources: {}

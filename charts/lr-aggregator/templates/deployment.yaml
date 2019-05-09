@@ -49,6 +49,7 @@ spec:
         - name: {{ $key }}
           hostPath:
             path: {{ $val }}
+            type: DirectoryOrCreate
 {{- end}}
       resources:
 {{ toYaml .Values.resources | indent 8 }}
