@@ -33,7 +33,7 @@ Execute steps in order:
 Execute steps in order:
 
 1. install Logrange cli command:<br/>
-`curl -s http://get.logrange.io/install | bash`
+`curl -s http://get.logrange.io/install | bash -s lr -d .`
 
 2. run Logrange shell:<br/>
 `lr shell --server-addr=lr-aggregator.kube-system.svc.cluster.local:9966`
