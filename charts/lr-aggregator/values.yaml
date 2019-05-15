@@ -3,9 +3,11 @@
 
 replicaCount: 1
 
+args:
+  version: "v0.0.4"
+
 image:
   repository: index.docker.io/logrange/logrange
-  tag: latest
   pullPolicy: Always
 
 service:

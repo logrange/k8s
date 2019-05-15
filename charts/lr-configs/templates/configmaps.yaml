@@ -5,16 +5,18 @@ metadata:
   name: lr-aggregator
   namespace: kube-system
   labels:
+    app: lr-aggregator
+    appVersion: {{ .Values.args.version }}
     heritage: {{ .Release.Service }}
     release: {{ .Release.Name }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version }}
-    app: lr-aggregator
 data:
+{{- if and .Values.args.version (eq .Values.args.version "v0.0.4") -}}
   logrange.json: |
-    {{ .Files.Get "configs/logrange.json" | nindent 4 }}
+{{ .Files.Get "configs/logrange.json" | nindent 4 }}
   log4g.properties: |
-    {{ .Files.Get "configs/log4g.properties" | nindent 4 }}
-
+{{ .Files.Get "configs/log4g.properties" | nindent 4 }}
+{{- end }}
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -22,16 +24,18 @@ metadata:
   name: lr-collector
   namespace: kube-system
   labels:
+    app: lr-collector
+    appVersion: {{ .Values.args.version }}
     heritage: {{ .Release.Service }}
     release: {{ .Release.Name }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version }}
-    app: lr-collector
 data:
+{{- if and .Values.args.version (eq .Values.args.version "v0.0.4") -}}
   collect.json: |
-    {{ .Files.Get "configs/collect.json" | nindent 4 }}
+{{ .Files.Get "configs/collect.json" | nindent 4 }}
   log4g.properties: |
-    {{ .Files.Get "configs/log4g.properties" | nindent 4 }}
-
+{{ .Files.Get "configs/log4g.properties" | nindent 4 }}
+{{- end }}
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -39,12 +43,15 @@ metadata:
   name: lr-forwarder
   namespace: kube-system
   labels:
+    app: lr-forwarder
+    appVersion: {{ .Values.args.version }}
     heritage: {{ .Release.Service }}
     release: {{ .Release.Name }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version }}
-    app: lr-forwarder
 data:
+{{- if and .Values.args.version (eq .Values.args.version "v0.0.4") -}}
   forward.json: |
-    {{ .Files.Get "configs/forward.json" | nindent 4 }}
+{{ .Files.Get "configs/forward.json" | nindent 4 }}
   log4g.properties: |
-    {{ .Files.Get "configs/log4g.properties" | nindent 4 }}
+{{ .Files.Get "configs/log4g.properties" | nindent 4 }}
+{{- end }}

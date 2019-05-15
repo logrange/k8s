@@ -12,7 +12,7 @@ function check {
 
 while [[ "$1" != "" ]]; do
     case $1 in
-        -v|--VERSION)
+        -v|--version)
             shift
             VERSION=$1
             ;;

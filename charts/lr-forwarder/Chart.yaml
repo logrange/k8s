@@ -1,5 +1,4 @@
 apiVersion: v1
-appVersion: "1.0"
 name: lr-forwarder
 description: Log forwarding agent
 version: 0.1.0

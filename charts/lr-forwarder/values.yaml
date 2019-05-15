@@ -3,9 +3,11 @@
 
 replicaCount: 1
 
+args:
+  version: "latest"
+
 image:
   repository: index.docker.io/logrange/forwarder
-  tag: latest
   pullPolicy: Always
 
 volumes:
