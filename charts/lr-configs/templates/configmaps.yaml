@@ -11,12 +11,12 @@ metadata:
     release: {{ .Release.Name }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version }}
 data:
-{{- if and .Values.args.version (eq .Values.args.version "v0.0.4") -}}
+{{ if and .Values.args.version (eq .Values.args.version "v0.0.4") }}
   logrange.json: |
 {{ .Files.Get "configs/logrange.json" | nindent 4 }}
   log4g.properties: |
 {{ .Files.Get "configs/log4g.properties" | nindent 4 }}
-{{- end }}
+{{ end }}
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -30,12 +30,12 @@ metadata:
     release: {{ .Release.Name }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version }}
 data:
-{{- if and .Values.args.version (eq .Values.args.version "v0.0.4") -}}
+{{ if and .Values.args.version (eq .Values.args.version "v0.0.4") }}
   collect.json: |
 {{ .Files.Get "configs/collect.json" | nindent 4 }}
   log4g.properties: |
 {{ .Files.Get "configs/log4g.properties" | nindent 4 }}
-{{- end }}
+{{ end }}
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -49,9 +49,9 @@ metadata:
     release: {{ .Release.Name }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version }}
 data:
-{{- if and .Values.args.version (eq .Values.args.version "v0.0.4") -}}
+{{ if and .Values.args.version (eq .Values.args.version "v0.0.4") }}
   forward.json: |
 {{ .Files.Get "configs/forward.json" | nindent 4 }}
   log4g.properties: |
 {{ .Files.Get "configs/log4g.properties" | nindent 4 }}
-{{- end }}
+{{ end }}
