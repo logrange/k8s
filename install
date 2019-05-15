@@ -43,7 +43,7 @@ while [[ "$1" != "" ]]; do
             WIPE=true
             ;;
         *)
-            echo "Unknown argument passed!"
+            echo "Unknown argument '$1' passed!"
             exit 1
             ;;
     esac
