@@ -1,6 +1,6 @@
 ### Logrange k8s installation
 
-Logrange k8s installation requires [Helm](https://helm.sh/) to be installed. The installation can be done either via [script](#Script:) or [manually](#Manual:). There are 4 key components which are installed during the installation: 
+Logrange k8s installation requires [Helm](https://helm.sh/) to be installed. The installation can be done either via [script](#script) or [manually](#manual). There are 4 key components which are installed during the installation: 
 
 * **lr-aggregator:** streaming database where all the logs are stored/aggregated after they are gathered from the nodes.
 
@@ -12,7 +12,7 @@ Logrange k8s installation requires [Helm](https://helm.sh/) to be installed. The
 
 The components come preconfigured for k8s cluster logs gathering, so no special configuration is needed, until you have some very custom k8s installation and/or requirements.
 
-After key components installation is done, [install](#Logrange CLI installation) our **CLI tool**, to make different kind of requests using **Logrange Query Language (LQL),** which is powerful and very SQL like!
+After key components installation is done, [install](#logrange-cli-installation) our **CLI tool**, to make different kind of requests using **Logrange Query Language (LQL),** which is powerful and very SQL like!
 
 #### Script:
 
