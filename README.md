@@ -39,15 +39,8 @@ $ helm install logrange/lr-forwarder
 
 ### Logrange CLI installation
 
-Execute steps in order:
-
-1. install Logrange cli command:<br/>
 ```
 $ curl -s http://get.logrange.io/install | bash -s -- lr -d /usr/local/bin
-```
-
-2. run Logrange shell:<br/>
-```
 $ lr shell --server-addr=lr-aggregator.kube-system.svc.cluster.local:9966
 ```
 
@@ -60,7 +53,7 @@ Execute steps in order:
 $ kubectl edit configmap lr-forwarder --namespace=kube-system
 ```
 2. Insert into `Workers` array, one or more blocks like shown below (substitute values in brackets):
-    ```javascript
+```javascript
     
        //    
        // Note: Only syslog protocol is supported for for now...
@@ -90,4 +83,4 @@ $ kubectl edit configmap lr-forwarder --namespace=kube-system
             } 
           }
         }
-    ```
+ ```
