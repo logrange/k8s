@@ -4,7 +4,7 @@
 replicaCount: 1
 
 args:
-  version: "latest"
+  version: "v0.0.4"
 
 image:
   repository: index.docker.io/logrange/forwarder

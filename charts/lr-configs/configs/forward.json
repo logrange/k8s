@@ -8,7 +8,6 @@
   "Transport": {
     "ListenAddr": "lr-aggregator.kube-system.svc.cluster.local:9966",
     "TlsEnabled": false,
-    "Tls2Way": false,
     "TlsCertFile": "/opt/logrange/lr/config/tls/client.crt",
     "TlsKeyFile": "/opt/logrange/lr/config/tls/client.key",
     "TlsCAFile": "/opt/logrange/lr/config/tls/ca.pem"
