@@ -54,33 +54,25 @@ $ kubectl edit configmap lr-forwarder --namespace=kube-system
 ```
 2. Insert into `Workers` array, one or more blocks like shown below (substitute values in brackets):
 ```javascript
-    
-       //    
-       // Note: Only syslog protocol is supported for for now...
-       //
-       // <NAME>             : name of your forwarder, e.g. "forwarder1"
-       // <REMOTE_SYSLOG>    : syslog server hostname/ip to where logs to be forwarded
-       //
-    
-        {
-          "Name": "<NAME>",
-          "Pipe": {
-            "Name": "logrange.pipe=__default__",
-          },
-          "Sink": {
-            "Type": "syslog",                      // syslog only
-            "Params": {
-              "Protocol": "tcp",                   // tcp, udp or tls (requires non-empty 'TlsCAFile')
-              "RemoteAddr": "<REMOTE_SYSLOG>:514",
-              "TlsCAFile": "",                     // required if 'Protocol' is 'tls'
-              "MessageSchema" : {
-                "Facility": "local6",
-                "Severity": "info",
-                "Hostname": "{vars:pod}",
-                "Tags": "{vars}",
-                "Msg": "{msg}"
-              }
-            } 
-          }
-        }
+{
+  "Name": "<NAME>",                          // name of your forwarder, e.g. "forwarder1"
+  "Pipe": {
+    "Name": "logrange.pipe=__default__",
+  },
+  "Sink": {
+    "Type": "syslog",                        // for only syslog is supported
+    "Params": {
+      "Protocol": "tcp",                     // tcp, udp or tls (requires non-empty 'TlsCAFile')
+      "RemoteAddr": "<REMOTE_SYSLOG>:514",   // syslog server hostname/ip to where logs to be forwarded
+      "TlsCAFile": "",                       // required if 'Protocol' is 'tls'
+      "MessageSchema" : {
+        "Facility": "local6",
+        "Severity": "info",
+        "Hostname": "{vars:pod}",
+        "Tags": "{vars}",
+        "Msg": "{msg}"
+      }
+    } 
+  }
+}
  ```
