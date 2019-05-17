@@ -60,11 +60,11 @@ $ kubectl edit configmap lr-forwarder --namespace=kube-system
     "Name": "logrange.pipe=__default__",
   },
   "Sink": {
-    "Type": "syslog",                        // for only syslog is supported
+    "Type": "syslog",                        // for now only "syslog" is supported
     "Params": {
-      "Protocol": "tcp",                     // tcp, udp or tls (requires non-empty 'TlsCAFile')
+      "Protocol": "tcp",                     // "tcp", "udp" or "tls" (requires non-empty "TlsCAFile")
       "RemoteAddr": "<REMOTE_SYSLOG>:514",   // syslog server hostname/ip to where logs to be forwarded
-      "TlsCAFile": "",                       // required if 'Protocol' is 'tls'
+      "TlsCAFile": "",                       // required if "Protocol" is "tls"
       "MessageSchema" : {
         "Facility": "local6",
         "Severity": "info",
