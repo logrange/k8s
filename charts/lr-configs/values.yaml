@@ -2,5 +2,5 @@
 # Declare variables to be passed into your templates.
 
 args:
-  version: "v0.0.4"
+  version: "v0.1.0"
 
