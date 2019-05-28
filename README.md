@@ -18,7 +18,7 @@ After key components installation is done, [install](#logrange-cli-installation)
 
 Install:<br/>
 ```
-$ curl -s http://get.logrange.io/k8s/install | bash -s -- --version v0.0.4
+$ curl -s http://get.logrange.io/k8s/install | bash -s -- --version v0.1.0
 ```
 
 Uninstall:<br/>
