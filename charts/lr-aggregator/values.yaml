@@ -18,6 +18,7 @@ service:
 volumes:
   varlog: /var/log
   varliblogrange: /var/lib/logrange
+  varlibdockercontainers: /var/lib/docker/containers
   extdockercontainers: /ext/docker/containers
 
 resources: {}
