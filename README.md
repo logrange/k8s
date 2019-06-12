@@ -26,8 +26,11 @@ Uninstall:<br/>
 $ curl -s http://get.logrange.io/k8s/install | bash -s -- --uninstall
 ```
 
+_Note:_ Script uninstall works only if you did "script install" otherwise you should do uninstall [manually](#manual).
+
 #### Manual:
 
+Install:<br/>
 ```
 $ helm repo add logrange http://get.logrange.io/k8s/helm/
 $ helm repo update
@@ -35,6 +38,12 @@ $ helm install logrange/lr-configs
 $ helm install logrange/lr-aggregator
 $ helm install logrange/lr-collector
 $ helm install logrange/lr-forwarder
+```
+
+Uninstall:<br/>
+```
+$ helm list
+$ helm delete <release name>
 ```
 
 ### Logrange CLI installation
