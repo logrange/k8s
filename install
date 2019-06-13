@@ -107,7 +107,7 @@ if [[ ${MODE} -eq 1 ]]; then
 
     COMPS="${LGR_CONFS} ${LGR_COMPS}";
     for comp in ${COMPS}; do
-        opts=$(echo ${OPTIONS} | jq ".\"${comp}\" | select (.!=null)")
+        opts=$(echo ${OPTIONS} | jq -r ".\"${comp}\" | select (.!=null)")
         echo "Installing ${comp} appVersion=${VERSION} namespace=${NAMESPACE} options=${opts}..."
 
         helm status ${comp} >/dev/null 2>&1
