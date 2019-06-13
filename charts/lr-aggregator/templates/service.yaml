@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ template "logrange.name" . }}
-  namespace: kube-system
+  namespace: {{ .Values.args.namespace }}
 {{- with .Values.service.annotations }}
   annotations:
 {{ toYaml . | indent 4 }}

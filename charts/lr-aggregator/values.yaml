@@ -5,6 +5,7 @@ replicaCount: 1
 
 args:
   version: "v0.1.1"
+  namespace: "kube-system"
 
 image:
   repository: index.docker.io/logrange/logrange

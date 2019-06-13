@@ -2,7 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: {{ template "logrange.name" . }}
-  namespace: kube-system
+  namespace: {{ .Values.args.namespace }}
   labels:
     app: {{ template "logrange.name" . }}
     appVersion: {{ .Values.args.version }}

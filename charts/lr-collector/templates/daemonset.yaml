@@ -2,7 +2,7 @@ apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
   name: {{ template "collector.name" . }}
-  namespace: kube-system
+  namespace: {{ .Values.args.namespace }}
   labels:
     app: {{ template "collector.name" . }}
     appVersion: {{ .Values.args.version }}

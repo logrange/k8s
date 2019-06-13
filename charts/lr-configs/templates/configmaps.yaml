@@ -3,7 +3,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: lr-aggregator
-  namespace: kube-system
+  namespace: {{ .Values.args.namespace }}
   labels:
     app: lr-aggregator
     appVersion: {{ .Values.args.version }}
@@ -22,7 +22,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: lr-collector
-  namespace: kube-system
+  namespace: {{ .Values.args.namespace }}
   labels:
     app: lr-collector
     appVersion: {{ .Values.args.version }}
@@ -41,7 +41,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: lr-forwarder
-  namespace: kube-system
+  namespace: {{ .Values.args.namespace }}
   labels:
     app: lr-forwarder
     appVersion: {{ .Values.args.version }}
