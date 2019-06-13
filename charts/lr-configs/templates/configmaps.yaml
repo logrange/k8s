@@ -32,7 +32,7 @@ metadata:
 data:
 {{ if and .Values.args.version (eq .Values.args.version "v0.1.1") }}
   collect.json: |
-{{ .Files.Get "configs/collect.json" | nindent 4 }}
+{{ tpl (.Files.Get "configs/collect.json") . | nindent 4 }}
   log4g.properties: |
 {{ .Files.Get "configs/log4g.properties" | nindent 4 }}
 {{ end }}
@@ -51,7 +51,7 @@ metadata:
 data:
 {{ if and .Values.args.version (eq .Values.args.version "v0.1.1") }}
   forward.json: |
-{{ .Files.Get "configs/forward.json" | nindent 4 }}
+{{ tpl (.Files.Get "configs/forward.json") . | nindent 4 }}
   log4g.properties: |
 {{ .Files.Get "configs/log4g.properties" | nindent 4 }}
 {{ end }}

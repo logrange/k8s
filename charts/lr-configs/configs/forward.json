@@ -6,7 +6,7 @@
   },
 
   "Transport": {
-    "ListenAddr": "lr-aggregator.kube-system.svc.cluster.local:9966",
+    "ListenAddr": "lr-aggregator.{{ .Values.args.namespace }}.svc.cluster.local:9966",
     "TlsEnabled": false,
     "TlsCertFile": "/opt/logrange/lr/config/tls/client.crt",
     "TlsKeyFile": "/opt/logrange/lr/config/tls/client.key",
