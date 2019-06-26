@@ -63,7 +63,7 @@ if [[ -z ${MODE} ]]; then
 fi
 
 if [[ ${MODE} -eq 1 ]] && [[ -z ${VERSION} ]]; then
-    echo "Error: version must be provided e.g. '--version v0.0.4'"
+    echo "Error: version must be provided e.g. '--version v0.1.43'"
     exit 1
 fi
 

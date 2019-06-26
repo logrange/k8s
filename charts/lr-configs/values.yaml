@@ -2,5 +2,5 @@
 # Declare variables to be passed into your templates.
 
 args:
-  version: "v0.1.1"
+  version: "v0.1.43"
   namespace: "kube-system"
