@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-function check {
+function check() {
     code=$1;
     if [[ ${code} -ne 0 ]]; then
         echo "ERROR!"
@@ -47,7 +47,7 @@ while [[ "$1" != "" ]]; do
         -u|--uninstall)
             MODE=2
             ;;
-        -c|--wipe)
+        -w|--wipe)
             WIPE=true
             ;;
         *)
@@ -63,7 +63,12 @@ if [[ -z ${MODE} ]]; then
 fi
 
 if [[ ${MODE} -eq 1 ]] && [[ -z ${VERSION} ]]; then
-    echo "Error: version must be provided e.g. '--version v0.1.43'"
+    echo "Error: version must be provided e.g. '--version v0.1.47'"
+    exit 1
+fi
+
+if [[ ${MODE} -eq 1 ]] && [[ -z ${NAMESPACE} ]]; then
+    echo "Error: namespace must be provided e.g. '--namespace kube-system'"
     exit 1
 fi
 
@@ -77,7 +82,7 @@ LGR_CONFS="lr-configs"
 LGR_COMPS="lr-aggregator lr-collector lr-forwarder"
 
 echo "Checking helm..."
-helm init --client-only >/dev/null
+helm version >/dev/null
 check $?
 
 echo "Checking kubectl..."
@@ -115,7 +120,7 @@ if [[ ${MODE} -eq 1 ]]; then
             echo "Already installed, skipping..."
             continue
         fi
-        helm install logrange/${comp} --name ${comp} \
+        helm install ${comp} logrange/${comp} \
             --set args.version=${VERSION},args.namespace=${NAMESPACE},${opts} >/dev/null
         check $?
     done
@@ -142,7 +147,7 @@ else
             echo "Not found, skipping..."
             continue
         fi
-        helm delete --purge ${comp} >/dev/null
+        helm uninstall ${comp} >/dev/null
         check $?
     done
 fi

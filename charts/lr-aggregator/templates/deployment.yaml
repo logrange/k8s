@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "logrange.name" . }}
@@ -32,6 +32,8 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.args.version }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
           ports:
             - name: rpc
               protocol: TCP
@@ -53,8 +55,6 @@ spec:
             path: {{ $val }}
             type: DirectoryOrCreate
 {{- end}}
-      resources:
-{{ toYaml .Values.resources | indent 8 }}
 {{- with .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}

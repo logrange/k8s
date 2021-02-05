@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: {{ template "collector.name" . }}
@@ -31,6 +31,8 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.args.version }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
           volumeMounts:
             - name: config
               mountPath: /opt/logrange/lr/config
@@ -48,8 +50,6 @@ spec:
             path: {{ $val }}
             type: DirectoryOrCreate
 {{- end}}
-      resources:
-{{ toYaml .Values.resources | indent 8 }}
 {{- with .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}

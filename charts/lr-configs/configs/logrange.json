@@ -4,12 +4,16 @@
   "HostLeaseTTLSec": 5,
   "HostRegisterTimeoutSec": 0,
   "PublicApiRpc": {
-    "ListenAddr": "0.0.0.0:9966",
-    "TlsEnabled": false,
-    "Tls2Way": false,
-    "TlsCertFile": "/opt/logrange/config/tls/server.crt",
-    "TlsKeyFile": "/opt/logrange/config/tls/server.key",
-    "TlsCAFile": "/opt/logrange/config/tls/ca.pem"
+{{- if .Values.args.tls.enabled }}
+    "TlsEnabled": true,
+{{- if .Values.args.tls.verifyClient }}
+    "Tls2Way": true,
+    "TlsCAFile": "/var/lib/logrange/tls/ca.crt",
+{{- end }}
+    "TlsCertFile": "/var/lib/logrange/tls/server.crt",
+    "TlsKeyFile": "/var/lib/logrange/tls/server.key",
+{{- end }}
+    "ListenAddr": "0.0.0.0:9966"
   },
   "JrnlCtrlConfig": {
     "MaxOpenFileDescs": 500,
@@ -20,13 +24,5 @@
     "WriteFlushMs": 500,
     "MaxChunkSize": 5000000,
     "MaxRecordSize": 1048576
-  },
-  "PipesConfig": {
-    "EnsureAtStart": [
-      {
-        "Name": "__default__",
-        "TagsCond": "cname!='lr-aggregator' and cname!='lr-collector' and cname!='lr-forwarder'"
-      }
-    ]
   }
 }

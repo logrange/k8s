@@ -11,9 +11,9 @@ metadata:
     release: {{ .Release.Name }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version }}
 data:
-{{ if and .Values.args.version (eq .Values.args.version "v0.1.43") }}
+{{ if and .Values.args.version (eq .Values.args.version "v0.1.47") }}
   logrange.json: |
-{{ .Files.Get "configs/logrange.json" | nindent 4 }}
+{{ tpl (.Files.Get "configs/logrange.json") . | nindent 4 }}
   log4g.properties: |
 {{ .Files.Get "configs/log4g.properties" | nindent 4 }}
 {{ end }}
@@ -30,7 +30,7 @@ metadata:
     release: {{ .Release.Name }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version }}
 data:
-{{ if and .Values.args.version (eq .Values.args.version "v0.1.43") }}
+{{ if and .Values.args.version (eq .Values.args.version "v0.1.47") }}
   collect.json: |
 {{ tpl (.Files.Get "configs/collect.json") . | nindent 4 }}
   log4g.properties: |
@@ -49,7 +49,7 @@ metadata:
     release: {{ .Release.Name }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version }}
 data:
-{{ if and .Values.args.version (eq .Values.args.version "v0.1.43") }}
+{{ if and .Values.args.version (eq .Values.args.version "v0.1.47") }}
   forward.json: |
 {{ tpl (.Files.Get "configs/forward.json") . | nindent 4 }}
   log4g.properties: |

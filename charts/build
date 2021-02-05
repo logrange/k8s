@@ -39,7 +39,7 @@ check $?
 
 for chart in "lr-configs" "lr-aggregator" "lr-collector" "lr-forwarder"
 do
-    helm package ${SRC_PATH}/${chart} --save=false
+    helm package ${SRC_PATH}/${chart} # no --save=false in Helm 3
     check $?
 done
 
@@ -48,6 +48,6 @@ check $?
 
 if [[ ! -z ${UPLOAD} ]]; then
     echo "Uploading helm repo to s3://get.logrange.io/k8s/helm..."
-    aws s3 cp ./ s3://get.logrange.io/k8s/helm --recursive
+    aws s3 cp ./ s3://get.logrange.io/k8s/helm --recursive --profile logrange
     check $?
 fi

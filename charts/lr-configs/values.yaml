@@ -2,5 +2,8 @@
 # Declare variables to be passed into your templates.
 
 args:
-  version: "v0.1.43"
+  version: "v0.1.47"
   namespace: "kube-system"
+  tls:
+    enabled: false
+    verifyClient: false

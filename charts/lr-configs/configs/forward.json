@@ -4,15 +4,17 @@
     "StateStoreIntervalSec": 20,
     "SyncWorkersIntervalSec": 5
   },
-
   "Transport": {
-    "ListenAddr": "lr-aggregator.{{ .Values.args.namespace }}.svc.cluster.local:9966",
-    "TlsEnabled": false,
-    "TlsCertFile": "/opt/logrange/lr/config/tls/client.crt",
-    "TlsKeyFile": "/opt/logrange/lr/config/tls/client.key",
-    "TlsCAFile": "/opt/logrange/lr/config/tls/ca.pem"
+{{- if .Values.args.tls.enabled }}
+    "TlsEnabled": true,
+    "TlsCAFile": "/var/lib/logrange/lr/tls/ca.crt",
+{{- if .Values.args.tls.verifyClient }}
+    "TlsCertFile": "/var/lib/logrange/lr/tls/client.crt",
+    "TlsKeyFile": "/var/lib/logrange/lr/tls/client.key",
+{{- end }}
+{{- end }}
+    "ListenAddr": "lr-aggregator.{{ .Values.args.namespace }}.svc.cluster.local:9966"
   },
-
   "Storage": {
     "Type": "file",
     "Location": "/var/lib/logrange/lr/storage/"

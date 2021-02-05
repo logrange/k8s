@@ -19,6 +19,9 @@ spec:
     - name: rpc
       protocol: TCP
       port: {{ .Values.service.port }}
+{{- if eq  .Values.service.type "NodePort" }}
+      nodePort: {{ .Values.service.nodePort }}
+{{- end }}
   selector:
     app: {{ template "logrange.name" . }}
     release: {{ .Release.Name }}
