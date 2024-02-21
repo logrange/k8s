@@ -41,10 +41,10 @@ Install:<br/>
 ```bash
 $ helm repo add logrange https://logrange.io/download/k8s/helm/
 $ helm repo update
-$ helm install logrange/lr-configs 
-$ helm install logrange/lr-aggregator --set service.type=NodePort
-$ helm install logrange/lr-collector
-$ helm install logrange/lr-forwarder
+$ helm install lr-configs logrange/lr-configs 
+$ helm install lr-aggregator logrange/lr-aggregator --set service.type=NodePort
+$ helm install lr-collector logrange/lr-collector
+$ helm install lr-forwarder logrange/lr-forwarder
 ```
 
 Uninstall:<br/>
