@@ -32,3 +32,6 @@ done
 
 helm repo index .
 check $?
+
+mkdir -p ${SRC_PATH}/repo
+mv ./* ${SRC_PATH}/repo
