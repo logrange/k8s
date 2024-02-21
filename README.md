@@ -24,7 +24,7 @@ jq = latest
 
 Install:<br/>
 ```bash
-$ curl -s https://logrange.io/download/k8s/install | bash -s -- --version v0.1.48 \
+$ curl -s https://logrange.io/download/k8s/install | bash -s -- --version v0.1.47 \
     --namespace kube-system --options '{ "lr-aggregator": "service.type=NodePort" }'
 ```
 
