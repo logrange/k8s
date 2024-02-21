@@ -15,19 +15,6 @@ function check {
 
 ################# Main #################
 
-while [[ "$1" != "" ]]; do
-    case $1 in
-        -u|--upload)
-            UPLOAD=1
-            ;;
-        *)
-            echo "Unknown argument passed!"
-            exit 1
-            ;;
-    esac
-    shift
-done
-
 TMP_PATH=$(mktemp -d)
 trap cleanup EXIT
 
@@ -45,9 +32,3 @@ done
 
 helm repo index .
 check $?
-
-if [[ ! -z ${UPLOAD} ]]; then
-    echo "Uploading helm repo to s3://get.logrange.io/k8s/helm..."
-    aws s3 cp ./ s3://get.logrange.io/k8s/helm --recursive --profile logrange
-    check $?
-fi

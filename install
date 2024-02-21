@@ -92,7 +92,7 @@ check $?
 ### install
 if [[ ${MODE} -eq 1 ]]; then
     echo "Adding helm repo..."
-    out=$(helm repo add logrange http://get.logrange.io/k8s/helm/ && helm repo update)
+    out=$(helm repo add logrange https://logrange.io/download/k8s/helm/ && helm repo update)
     check $?
 
     node=$(get_labeled_node ${LGR_LABEL})

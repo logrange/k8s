@@ -24,13 +24,13 @@ jq = latest
 
 Install:<br/>
 ```bash
-$ curl -s http://get.logrange.io/k8s/install | bash -s -- --version v0.1.47 \
+$ curl -s https://logrange.io/download/k8s/install | bash -s -- --version v0.1.48 \
     --namespace kube-system --options '{ "lr-aggregator": "service.type=NodePort" }'
 ```
 
 Uninstall:<br/>
 ```bash
-$ curl -s http://get.logrange.io/k8s/install | bash -s -- --uninstall --wipe
+$ curl -s https://logrange.io/download/k8s/install | bash -s -- --uninstall --wipe
 ```
 
 _Note:_ Script uninstall works only if you did "script install" otherwise you should do uninstall [manually](#manual).
@@ -39,7 +39,7 @@ _Note:_ Script uninstall works only if you did "script install" otherwise you sh
 
 Install:<br/>
 ```bash
-$ helm repo add logrange http://get.logrange.io/k8s/helm/
+$ helm repo add logrange https://logrange.io/download/k8s/helm/
 $ helm repo update
 $ helm install logrange/lr-configs 
 $ helm install logrange/lr-aggregator --set service.type=NodePort
@@ -60,7 +60,7 @@ $ helm uninstall lr-configs
 
 ```bash
 # go to the cluster node/pod where you're going to use CLI
-$ curl -s http://get.logrange.io/install | bash -s -- lr -d /usr/local/bin
+$ curl -s https://logrange.io/download/install | bash -s -- lr -d /usr/local/bin
 
 # to work with CLI inside a cluster pod
 $ lr shell --server-addr=lr-aggregator.kube-system.svc.cluster.local:9966

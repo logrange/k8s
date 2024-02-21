@@ -43,7 +43,7 @@ do
     cd ${SRC_PATH}/${img}
     check $?
 
-    curl -sOfL http://get.logrange.io/binaries/${VERSION}/linux/x86_64/${bin} && chmod +x ${bin}
+    curl -sOfL https://logrange.io/download/binaries/${VERSION}/linux/arm64/${bin} && chmod +x ${bin}
     check $?
 
     image=logrange/${img}:${VERSION}
